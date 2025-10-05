@@ -3,133 +3,531 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🚧 Site em Construção | Nova Frota</title>
+  <title>🚀 Nova Frota | Nerd Mode: Site em Construção</title>
   <style>
+    :root {
+      --bg: #050b18;
+      --card: rgba(8, 17, 32, 0.82);
+      --cyan: #7ef9ff;
+      --magenta: #ff4df0;
+      --yellow: #f7ff70;
+      --green: #61ffb1;
+      --muted: #9aa0b6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: #0b0c10;
-      color: #66fcf1;
-      font-family: 'Courier New', monospace;
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      background: radial-gradient(circle at 20% 20%, #10203b, var(--bg));
+      color: var(--cyan);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
+      padding: 40px 16px;
+      overflow: hidden;
     }
 
-    h1 {
-      font-size: 2.5em;
-      color: #45a29e;
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      inset: -200vmax;
+      background-image: radial-gradient(var(--cyan) 1px, transparent 0);
+      background-size: 80px 80px;
+      opacity: 0.08;
+      animation: drift 120s linear infinite;
+      pointer-events: none;
     }
 
-    p {
-      font-size: 1.2em;
-      max-width: 500px;
+    body::after {
+      background-image: radial-gradient(var(--magenta) 1px, transparent 0);
+      animation-duration: 180s;
+      mix-blend-mode: screen;
+      opacity: 0.06;
     }
 
-    .loader {
-      border: 6px solid #1f2833;
-      border-top: 6px solid #66fcf1;
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      animation: spin 1.5s linear infinite;
-      margin: 30px auto;
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(300px, 500px, 0); }
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    main {
+      position: relative;
+      background: var(--card);
+      border: 1px solid rgba(126, 249, 255, 0.25);
+      border-radius: 18px;
+      max-width: 960px;
+      width: 100%;
+      padding: 40px 32px 32px;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(126, 249, 255, 0.1);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
     }
 
-    .ascii {
-      font-size: 14px;
-      color: #c5c6c7;
-      margin-top: 30px;
-      white-space: pre;
-      font-family: monospace;
-    }
-
-    .blink {
-      animation: blink 1s steps(2, start) infinite;
-    }
-
-    @keyframes blink {
-      to { visibility: hidden; }
-    }
-
-    footer {
+    .scanline {
       position: absolute;
-      bottom: 10px;
-      font-size: 0.9em;
-      color: #818181;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 14px,
+        rgba(126, 249, 255, 0.03) 14px,
+        rgba(126, 249, 255, 0.03) 16px
+      );
+      animation: scroll-lines 6s linear infinite;
+      pointer-events: none;
     }
 
-    a {
-      color: #66fcf1;
-      text-decoration: none;
+    @keyframes scroll-lines {
+      from { transform: translateY(-16px); }
+      to { transform: translateY(0); }
     }
 
-    a:hover {
-      text-decoration: underline;
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glitch {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      position: relative;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(126, 249, 255, 0.55);
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: screen;
+      animation: glitch 2.5s infinite;
+    }
+
+    .glitch::before {
+      color: var(--magenta);
+      clip-path: inset(0 0 50% 0);
+      animation-delay: 0.2s;
+    }
+
+    .glitch::after {
+      color: var(--green);
+      clip-path: inset(50% 0 0 0);
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-3px, -1px); }
+      40% { transform: translate(3px, 1px); }
+      60% { transform: translate(-1px, 3px); }
+      80% { transform: translate(2px, -2px); }
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin: 16px auto 0;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    .progress-card {
+      display: grid;
+      gap: 18px;
+      background: rgba(7, 15, 30, 0.8);
+      border: 1px solid rgba(126, 249, 255, 0.15);
+      padding: 22px;
+      border-radius: 14px;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    progress {
+      width: 100%;
+      height: 16px;
+      border: 1px solid rgba(126, 249, 255, 0.5);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    progress::-webkit-progress-bar {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    progress::-webkit-progress-value {
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    }
+
+    .terminal {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(126, 249, 255, 0.14);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 0.92rem;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .terminal::before {
+      content: 'nova-frota-shell $';
+      color: var(--green);
+      font-weight: bold;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .terminal-log {
+      max-height: 150px;
+      overflow: auto;
+      padding-right: 8px;
+      scrollbar-width: thin;
+    }
+
+    .terminal-log span {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
     }
 
     button {
-      margin-top: 20px;
-      background: #1f2833;
-      border: 1px solid #45a29e;
-      color: #66fcf1;
-      padding: 10px 20px;
-      border-radius: 8px;
+      background: linear-gradient(120deg, rgba(126, 249, 255, 0.2), rgba(255, 77, 240, 0.25));
+      border: 1px solid rgba(126, 249, 255, 0.4);
+      color: var(--cyan);
+      font-family: inherit;
+      padding: 10px 24px;
+      border-radius: 999px;
       cursor: pointer;
-      font-family: 'Courier New', monospace;
-      transition: background 0.3s;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     button:hover {
-      background: #45a29e;
-      color: #0b0c10;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(126, 249, 255, 0.2);
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .nerd-line {
+      font-style: italic;
+      color: var(--yellow);
+    }
+
+    .game-card {
+      display: grid;
+      gap: 16px;
+      background: rgba(7, 15, 30, 0.8);
+      border: 1px solid rgba(97, 255, 177, 0.25);
+      padding: 22px;
+      border-radius: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(80px, 1fr));
+      gap: 12px;
+      justify-items: center;
+    }
+
+    .hole {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      background: rgba(5, 11, 24, 0.9);
+      border: 1px dashed rgba(126, 249, 255, 0.28);
+      display: grid;
+      place-items: center;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      transition: background 0.2s ease, transform 0.2s ease;
+      color: rgba(255, 255, 255, 0.12);
+    }
+
+    .hole.bug {
+      background: rgba(255, 77, 240, 0.18);
+      color: var(--magenta);
+      transform: scale(1.06);
+      text-shadow: 0 0 12px rgba(255, 77, 240, 0.5);
+    }
+
+    .hole.poof {
+      animation: poof 0.45s ease;
+    }
+
+    @keyframes poof {
+      from { transform: scale(1.1); opacity: 1; }
+      to { transform: scale(0.5); opacity: 0; }
+    }
+
+    .score-board {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .score-board span {
+      color: var(--yellow);
+      font-weight: bold;
+    }
+
+    .ascii-box {
+      margin-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .ascii-art {
+      display: inline-block;
+      padding: 18px 22px 16px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(126, 249, 255, 0.18);
+      border-radius: 12px;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      white-space: pre;
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(126, 249, 255, 0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    .easter-egg {
+      color: var(--green);
+      cursor: pointer;
+      text-decoration: underline dotted;
+    }
+
+    @media (max-width: 680px) {
+      main {
+        padding: 28px 20px;
+      }
+
+      .game-grid {
+        grid-template-columns: repeat(3, minmax(70px, 1fr));
+      }
     }
   </style>
 </head>
 <body>
+  <main>
+    <div class="scanline"></div>
+    <header>
+      <h1 class="glitch" data-text="Deploy em Hiperespaço">Deploy em Hiperespaço</h1>
+      <p class="subtitle">Nova Frota está a compilar motores, subir escudos e calibrar o GPS intergaláctico. Enquanto isso, aproveita e testa os sistemas secundários abaixo.</p>
+    </header>
 
-  <h1>🚗 Nova Frota em Construção!</h1>
-  <p>O sistema ainda está a ser calibrado... o programador foi fazer “deploy” de café. ☕</p>
+    <section class="progress-card">
+      <div class="status-row">
+        <strong>Checklist da Frota</strong>
+        <span>87% concluído · ETA: quando o café acabar ☕</span>
+      </div>
+      <progress max="100" value="87"></progress>
+      <div class="status-row">
+        <span>TODO: <span class="nerd-line">Resolver bug em produção antes de chegar a produção</span></span>
+        <button type="button" id="piada-btn">Gerar piada nerd</button>
+      </div>
+      <p class="nerd-line" id="piada-log">Clique acima para invocar humor a 88 mph.</p>
+    </section>
 
-  <div class="loader"></div>
+    <section class="terminal">
+      <div class="terminal-log" id="terminal-log">
+        <span>[INFO] Bootloader da nave carregado.</span>
+        <span>[WARN] Encontrado comentário TODO com 42 referências.</span>
+        <span>[OK] Café suficiente para mais 3 deploys.</span>
+      </div>
+      <button type="button" id="inject-log">Injectar logs dramáticos</button>
+    </section>
 
-  <p><span class="blink">>_</span> Iniciando motor virtual... Aguarde.</p>
+    <section class="game-card">
+      <h2>Mini-jogo: Caça aos Bugs 👾</h2>
+      <p>Os bugs de outra dimensão estão a infiltrar-se no hiperdrive. Clica neles antes que causem merge conflicts entre galáxias!</p>
+      <div class="score-board">
+        <div>Pontuação: <span id="score">0</span></div>
+        <div>Tempo restante: <span id="timer">30</span>s</div>
+      </div>
+      <button type="button" id="start-game">Iniciar modo bug hunter</button>
+      <div class="game-grid" id="game-grid">
+        <div class="hole" data-hole="0"></div>
+        <div class="hole" data-hole="1"></div>
+        <div class="hole" data-hole="2"></div>
+        <div class="hole" data-hole="3"></div>
+        <div class="hole" data-hole="4"></div>
+        <div class="hole" data-hole="5"></div>
+        <div class="hole" data-hole="6"></div>
+        <div class="hole" data-hole="7"></div>
+        <div class="hole" data-hole="8"></div>
+      </div>
+      <p id="game-status" class="nerd-line">Dica ninja: clicar em `CTRL` + `S` pode não ajudar, mas faz-te sentir útil.</p>
+    </section>
 
-  <div class="ascii">
-    {\__/}<br>
-    (•ᴥ• ) <br>
-    /&nbsp;&nbsp;&nbsp;🚘  &lt;-- hamster a testar a frota
-  </div>
+    <div class="ascii-box">
+      <div class="ascii-art">/\\__/\\
+( •_• )   Nova Frota.exe
+/>🚀   lançamento em T-minus 404 segundos
+      </div>
+      <p>Sabias? Se disseres <span class="easter-egg" id="easter-egg">"sudo finish-site"</span> três vezes, o programador acorda... ou reinicia.</p>
+    </div>
 
-  <button onclick="mostrarPiada()">💡 Tentar hackear o sistema</button>
-
-  <p id="piada" style="display:none; margin-top:20px;"></p>
-
-  <footer>
-    Nova Frota © 2025 — “Em breve no modo turbo!” ⚙️
-  </footer>
+    <footer>
+      Nova Frota © 2025 · Modo DevOps: ON · Build hash: caf3babe
+    </footer>
+  </main>
 
   <script>
-    function mostrarPiada() {
-      const piadas = [
-        "Erro 404: Programador não encontrado.",
-        "Sistema em modo stealth... ou crashou, ninguém sabe.",
-        "Tentativa de hack detectada. A enviar croissants para o programador.",
-        "Compilando humor... isso pode demorar.",
-        "Carros prontos. Só falta o site."
-      ];
-      const aleatoria = piadas[Math.floor(Math.random() * piadas.length)];
-      document.getElementById('piada').innerText = aleatoria;
-      document.getElementById('piada').style.display = 'block';
-    }
-  </script>
+    const jokes = [
+      'Deploy cancelado. Jenkins foi abduzido por um UFO com CI/CD próprio.',
+      'Erro 418: o servidor é uma chaleira. Pelo menos faz café.',
+      'Bug crítico detectado: falta ; no final da linha 9000 do manual de bordo.',
+      'A IA disse que já acabou. A IA também disse que precisamos reescrever tudo em Rust.',
+      'Estatística oficial: 73% dos problemas resolvem-se com reboot, 27% com memes.'
+    ];
 
+    const dramaticLogs = [
+      '[ALERTA] Alguém fez push na main às 23:42.',
+      '[RETRY] Compilador a tentar traduzir var let const para bom senso.',
+      '[TRACE] Wormhole aberto. Deploy vai passar perto de Netuno.',
+      '[DEBUG] Encontrado feitiço legacy: `if (true) { // TODO }`.',
+      '[METRIC] 99.97% de uptime, 0.03% de tempo a olhar para o vazio.'
+    ];
+
+    const piadaBtn = document.getElementById('piada-btn');
+    const piadaLog = document.getElementById('piada-log');
+    const injectLogBtn = document.getElementById('inject-log');
+    const terminalLog = document.getElementById('terminal-log');
+    const startGameBtn = document.getElementById('start-game');
+    const scoreEl = document.getElementById('score');
+    const timerEl = document.getElementById('timer');
+    const gameStatus = document.getElementById('game-status');
+    const holes = Array.from(document.querySelectorAll('.hole'));
+    const easterEgg = document.getElementById('easter-egg');
+
+    let currentBug = null;
+    let score = 0;
+    let timeLeft = 30;
+    let spawnTimer = null;
+    let countdownTimer = null;
+    let gameActive = false;
+
+    function randomItem(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function logToTerminal(message) {
+      const span = document.createElement('span');
+      span.textContent = message;
+      terminalLog.appendChild(span);
+      terminalLog.scrollTop = terminalLog.scrollHeight;
+    }
+
+    piadaBtn.addEventListener('click', () => {
+      const joke = randomItem(jokes);
+      piadaLog.textContent = joke;
+    });
+
+    injectLogBtn.addEventListener('click', () => {
+      logToTerminal(randomItem(dramaticLogs));
+    });
+
+    function resetBug() {
+      if (currentBug) {
+        currentBug.classList.remove('bug');
+        currentBug.textContent = '';
+      }
+      currentBug = null;
+    }
+
+    function spawnBug() {
+      resetBug();
+      const hole = randomItem(holes);
+      hole.classList.add('bug');
+      hole.textContent = '👾';
+      currentBug = hole;
+    }
+
+    function endGame(message) {
+      clearInterval(spawnTimer);
+      clearInterval(countdownTimer);
+      resetBug();
+      gameActive = false;
+      startGameBtn.disabled = false;
+      gameStatus.textContent = message;
+    }
+
+    function tick() {
+      timeLeft -= 1;
+      timerEl.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        endGame(`GG! Pontuação final: ${score}. Reinicia e evita que os bugs façam pull request.`);
+      }
+    }
+
+    startGameBtn.addEventListener('click', () => {
+      if (gameActive) return;
+      score = 0;
+      timeLeft = 30;
+      scoreEl.textContent = score;
+      timerEl.textContent = timeLeft;
+      gameStatus.textContent = 'Modo bug hunter iniciado. Clica rápido, salva o deploy!';
+      startGameBtn.disabled = true;
+      gameActive = true;
+      spawnBug();
+      spawnTimer = setInterval(spawnBug, 850);
+      countdownTimer = setInterval(tick, 1000);
+    });
+
+    holes.forEach((hole) => {
+      hole.addEventListener('click', () => {
+        if (!gameActive || hole !== currentBug) return;
+        score += 1;
+        scoreEl.textContent = score;
+        hole.classList.add('poof');
+        hole.textContent = '✅';
+        setTimeout(() => {
+          hole.classList.remove('poof');
+          if (hole === currentBug) {
+            hole.classList.remove('bug');
+            hole.textContent = '';
+            currentBug = null;
+          }
+        }, 200);
+      });
+    });
+
+    easterEgg.addEventListener('click', () => {
+      logToTerminal('[ROOT] sudo finish-site && rm -rf stress');
+      piadaLog.textContent = 'sudo: requere café adicional. Operação abortada por segurança da galáxia.';
+    });
+  </script>
 </body>
 </html>
