@@ -4,7 +4,8 @@ Landing page e API mínima para captação de leads em conformidade com o RGPD.
 
 ## Estrutura
 
-- `index.html` – Landing page estática com consentimento explícito, ligação ao endpoint `/api/leads` e informações sobre privacidade.
+- `index.html` – Landing page estática com consentimento explícito, ligação ao endpoint `/api/leads` e banner de preferências de cookies.
+- `privacidade.html` – Página dedicada à política de privacidade e GDPR.
 - `server.js` – API em Node.js (sem dependências externas) para guardar consentimentos e gerir exportações/apagamentos.
 - `data/leads.json` – Ficheiro JSON onde os pedidos são guardados (criado automaticamente na primeira execução).
 

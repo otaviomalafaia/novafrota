@@ -660,6 +660,77 @@
       opacity: 1;
     }
 
+    .cookie-banner {
+      position: fixed;
+      inset: auto 24px 24px 24px;
+      max-width: 420px;
+      display: grid;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow-soft);
+      color: var(--text);
+      transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      z-index: 20;
+    }
+
+    .cookie-banner.is-hidden {
+      transform: translateY(20px);
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .cookie-banner p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cookie-banner strong {
+      color: var(--text);
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-actions button {
+      flex: 1;
+      min-width: 140px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--stroke);
+      background: transparent;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cookie-actions button:hover,
+    .cookie-actions button:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--stroke-strong);
+    }
+
+    .cookie-actions .accept {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: transparent;
+    }
+
+    .cookie-actions .accept:hover,
+    .cookie-actions .accept:focus-visible {
+      border-color: transparent;
+    }
+
     footer {
       padding: 40px 24px 60px;
       background: var(--surface);
@@ -793,7 +864,7 @@
         <a href="#beneficios">Para quem é</a>
         <a href="#seguranca">Confiança</a>
         <a href="#app">Aplicação</a>
-        <a href="#privacidade">Privacidade</a>
+        <a href="privacidade.html">Privacidade</a>
       </nav>
       <a class="cta-header" href="#contacto">Quero testar</a>
     </div>
@@ -819,7 +890,7 @@
             </div>
             <label class="form-consent">
               <input type="checkbox" name="consent" required>
-              <span>Confirmo que li e aceito a <a href="#privacidade">Política de Privacidade</a> e autorizo o tratamento do meu email para receber comunicações sobre a NovaFrota.</span>
+              <span>Confirmo que li e aceito a <a href="privacidade.html">Política de Privacidade</a> e autorizo o tratamento do meu email para receber comunicações sobre a NovaFrota.</span>
             </label>
           </form>
           <div class="feedback" data-feedback aria-live="polite"></div>
@@ -974,51 +1045,6 @@
       </div>
     </section>
 
-    <section class="section" id="privacidade">
-      <div class="section-header">
-        <h2>Privacidade e GDPR</h2>
-        <p>Tratamos dados pessoais com transparência, minimização e segurança. Só recolhemos a informação indispensável para comunicar consigo sobre a NovaFrota e respeitamos todos os direitos previstos no RGPD.</p>
-      </div>
-      <div class="grid columns-2">
-        <article class="card">
-          <span class="badge">Responsável</span>
-          <h3>Controlador de dados</h3>
-          <p>A NovaFrota é responsável pelo tratamento dos dados recolhidos neste site. Pode contactar o nosso Encarregado de Proteção de Dados através de <a href="mailto:support@novafrota.pt">support@novafrota.pt</a> para qualquer questão relacionada com privacidade.</p>
-          <p class="legal-note">Base legal: consentimento explícito (Art.º 6.º, n.º 1, alínea a) do RGPD) e interesse legítimo para manter a segurança do serviço.</p>
-        </article>
-        <article class="card">
-          <span class="badge">Minimização</span>
-          <h3>Dados recolhidos</h3>
-          <ul class="legal-list">
-            <li>Email fornecido voluntariamente para envio de convites, novidades e respostas a pedidos de contacto.</li>
-            <li>Metadados técnicos mínimos (por exemplo, registos de segurança) agregados e anonimizados para garantir a estabilidade do site.</li>
-            <li>Registo do momento do consentimento (timestamp) e user agent para auditoria de conformidade.</li>
-          </ul>
-          <p class="legal-note">Nunca partilhamos os seus dados com terceiros para marketing sem novo consentimento.</p>
-        </article>
-      </div>
-      <div class="grid columns-2">
-        <article class="card">
-          <span class="badge">Direitos</span>
-          <h3>Os seus direitos</h3>
-          <ul class="legal-list">
-            <li>Acesso, retificação ou apagamento dos dados pessoais.</li>
-            <li>Limitação ou oposição ao tratamento dos dados.</li>
-            <li>Portabilidade dos dados para outro responsável.</li>
-            <li>Retirada do consentimento a qualquer altura sem afetar a licitude do tratamento já efetuado.</li>
-            <li>Apresentar reclamação junto da autoridade de controlo (CNPD em Portugal).</li>
-          </ul>
-        </article>
-        <article class="card">
-          <span class="badge">Retenção</span>
-          <h3>Retenção e cookies</h3>
-          <p>Conservamos o seu email apenas enquanto mantivermos comunicações relevantes ou até exercer o direito de apagamento. Se nada ouvir da nossa parte em 24 meses, removemos o contacto.</p>
-          <p class="legal-note">Este site não utiliza cookies de rastreamento ou perfis comportamentais; apenas recursos técnicos essenciais para o funcionamento. Os registos locais de consentimento guardados no seu navegador podem ser eliminados a qualquer momento limpando a cache.</p>
-        </article>
-      </div>
-      <p class="legal-note">Última atualização: Abril de 2025. Para exercer qualquer direito, contacte <a href="mailto:support@novafrota.pt">support@novafrota.pt</a>.</p>
-    </section>
-
     <section class="section" id="app">
       <div class="section-header">
         <h2>Aplicação pronta para escalar</h2>
@@ -1058,6 +1084,18 @@
     </section>
   </main>
 
+  <div class="cookie-banner is-hidden" role="dialog" aria-live="polite" aria-modal="false" data-cookie-banner>
+    <div>
+      <strong>Preferências de privacidade</strong>
+      <p>Usamos cookies estritamente necessários para que o site funcione. Opcionalmente, podemos usar métricas anónimas para melhorar a experiência.</p>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="accept" data-cookie-accept>Aceitar tudo</button>
+      <button type="button" data-cookie-decline>Apenas essenciais</button>
+    </div>
+    <p class="legal-note">Pode rever ou alterar o consentimento a qualquer momento em <a href="privacidade.html">Privacidade & GDPR</a>.</p>
+  </div>
+
   <footer>
     <div class="inner">
       <nav>
@@ -1067,7 +1105,7 @@
         <a href="#seguranca">Segurança</a>
         <a href="#app">App</a>
         <a href="#contacto">Contacto</a>
-        <a href="#privacidade">Privacidade</a>
+        <a href="privacidade.html">Privacidade</a>
       </nav>
       <small>NovaFrota © <span id="year"></span> · Mobilidade partilhada, segura e inteligente.</small>
     </div>
@@ -1078,6 +1116,10 @@
     const form = document.querySelector('[data-form]');
     const feedback = document.querySelector('[data-feedback]');
     const yearEl = document.getElementById('year');
+    const cookieBanner = document.querySelector('[data-cookie-banner]');
+    const cookieAcceptBtn = document.querySelector('[data-cookie-accept]');
+    const cookieDeclineBtn = document.querySelector('[data-cookie-decline]');
+    const COOKIE_KEY = 'novafrota-cookie-consent';
 
     if (yearEl) {
       yearEl.textContent = new Date().getFullYear();
@@ -1087,6 +1129,63 @@
       window.addEventListener('scroll', () => {
         header.classList.toggle('is-scrolled', window.scrollY > 10);
       }, { passive: true });
+    }
+
+    function storeCookiePreference(value) {
+      const record = {
+        value,
+        timestamp: new Date().toISOString(),
+      };
+      try {
+        localStorage.setItem(COOKIE_KEY, JSON.stringify(record));
+      } catch (error) {
+        console.warn('Não foi possível guardar a preferência de cookies.', error);
+      }
+    }
+
+    function getCookiePreference() {
+      try {
+        const raw = localStorage.getItem(COOKIE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
+    }
+
+    function hideCookieBanner() {
+      if (cookieBanner) {
+        cookieBanner.classList.add('is-hidden');
+        cookieBanner.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    function showCookieBanner() {
+      if (cookieBanner) {
+        cookieBanner.classList.remove('is-hidden');
+        cookieBanner.removeAttribute('aria-hidden');
+      }
+    }
+
+    const existingPreference = getCookiePreference();
+    if (!existingPreference) {
+      showCookieBanner();
+    } else {
+      hideCookieBanner();
+    }
+
+    if (cookieAcceptBtn) {
+      cookieAcceptBtn.addEventListener('click', () => {
+        storeCookiePreference('accepted');
+        hideCookieBanner();
+      });
+    }
+
+    if (cookieDeclineBtn) {
+      cookieDeclineBtn.addEventListener('click', () => {
+        storeCookiePreference('essential-only');
+        hideCookieBanner();
+      });
     }
 
     if (form && feedback) {
