@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="NovaFrota liga proprietários e condutores para partilha de veículos em horas mortas. Ganhe ao partilhar o seu carro com confiança total.">
-  <title>NovaFrota — Partilhe o seu carro. Ganhe tempo e rendimento.</title>
+  <title>NovaFrota — Ganhe dinheiro quando não usa o seu carro.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
@@ -103,9 +103,9 @@
 
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 18px;
       align-items: center;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--muted);
       flex-wrap: nowrap;
       white-space: nowrap;
@@ -282,6 +282,16 @@
       box-shadow: 0 22px 40px -28px rgba(17, 17, 17, 0.55);
     }
 
+    .hero-note {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(76, 240, 255, 0.12);
+      border: 1px solid rgba(76, 240, 255, 0.35);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
     .form-consent {
       display: flex;
       align-items: flex-start;
@@ -311,6 +321,7 @@
       position: relative;
       display: grid;
       place-items: center;
+      gap: 24px;
     }
 
     .hero-media::before {
@@ -325,6 +336,26 @@
       z-index: 0;
     }
 
+    .hero-visual {
+      position: relative;
+      width: min(460px, 95%);
+      margin: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      z-index: 0;
+      box-shadow: var(--shadow-soft);
+      display: block;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      filter: saturate(1.05);
+    }
+
     .hero-device {
       position: relative;
       width: min(380px, 90%);
@@ -334,6 +365,8 @@
       border: 1px solid var(--stroke-strong);
       box-shadow: var(--shadow-soft);
       z-index: 1;
+      margin-top: -120px;
+      backdrop-filter: blur(4px);
     }
 
     .device-header {
@@ -596,6 +629,52 @@
       color: var(--muted);
     }
 
+    .gallery {
+      padding-top: 0;
+    }
+
+    .gallery-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-card {
+      margin: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--stroke);
+      display: grid;
+      gap: 0;
+      background: var(--surface);
+    }
+
+    .gallery-card picture {
+      display: block;
+      overflow: hidden;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-card figcaption {
+      padding: 16px 18px;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: none;
+      backdrop-filter: none;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    }
+
     .cta-block {
       margin-top: 60px;
       padding: 36px;
@@ -837,12 +916,20 @@
         order: 1;
       }
 
+      .hero-device {
+        margin-top: 0;
+      }
+
       .grid.columns-3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .split {
         grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .cta-block {
@@ -858,6 +945,10 @@
     @media (max-width: 620px) {
       .grid.columns-3,
       .grid.columns-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
         grid-template-columns: 1fr;
       }
 
@@ -900,9 +991,6 @@
         <a href="#beneficios">Para quem é</a>
         <a href="#seguranca">Confiança</a>
         <a href="#app">Aplicação</a>
-        <a href="privacidade.html">Privacidade</a>
-        <a href="cookies.html">Cookies</a>
-        <a href="termos.html">Termos</a>
       </nav>
       <a class="cta-header" href="#contacto">Quero testar</a>
     </div>
@@ -912,13 +1000,14 @@
     <section class="hero" id="hero">
       <div class="inner">
         <div class="hero-copy">
-          <div class="accent-bar">Mobilidade partilhada.</div>
+          <div class="accent-bar">Mobilidade partilhada · sem fricção</div>
           <h1>Rentabilize o seu carro nas horas paradas.</h1>
-          <p>NovaFrota conecta proprietários e condutores verificados para alugueres sob medida: por hora, por dia ou nos períodos em que o carro estaria parado. Mais rendimento para uns, mais liberdade para outros.</p>
+          <p>NovaFrota conecta proprietários e condutores verificados para alugueres sob medida: por hora, por dia ou nos períodos em que o carro estaria parado. Agora o seu carro deixa de ser despesa e passa a gerar rendimento sempre que não está consigo.</p>
+          <div class="hero-note" role="status">Transforme o seu carro em renda extra: defina o valor, aprove a reserva e receba semanalmente sem complicações.</div>
           <ul class="hero-list">
-            <li><span>1</span> Defina horários, limites e preço em minutos.</li>
-            <li><span>2</span> Acompanhe a localização do veículo em tempo real durante o aluguer.</li>
-            <li><span>3</span> Acompanhe entregas, quilometragem e avaliações.</li>
+            <li><span>1</span> Defina horários, limites e preço.</li>
+            <li><span>2</span> Acompanhe a localização aproximada do veículo em tempo real durante o aluguer.</li>
+            <li><span>3</span> Acompanhe quilometragem e avaliações.</li>
           </ul>
           <form class="hero-form" data-form data-endpoint="/api/leads">
             <div class="form-fields">
@@ -934,6 +1023,10 @@
           <div class="feedback" data-feedback aria-live="polite"></div>
         </div>
         <div class="hero-media">
+          <picture class="hero-visual">
+            <source srcset="assets/media/hero.png" type="image/png">
+            <img src="assets/media/hero.png" alt="Motorista a conduzir com aplicação de navegação no smartphone" loading="lazy">
+          </picture>
           <div class="hero-device">
             <div class="device-header">
               <span class="pill">Painel NovaFrota</span>
@@ -1055,6 +1148,36 @@
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section class="section gallery">
+      <div class="section-header">
+        <h2>Momentos NovaFrota</h2>
+        <p>Conexão entre pessoas, mobilidade urbana em ritmo sustentável e partilha inteligente de veículos. Inspirados pelas ruas vivas e pelo futuro da mobilidade.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-card">
+          <picture>
+            <source srcset="assets/media/gallery-1.png" type="image/png">
+            <img src="assets/media/gallery-1.png" alt="Cliente a entrar num carro com motorista profissional numa rua moderna" loading="lazy">
+          </picture>
+          <figcaption>Partilhas urbanas com recolha em pontos estratégicos.</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <picture>
+            <source srcset="assets/media/gallery-2.png" type="image/png">
+            <img src="assets/media/gallery-2.png" alt="Motorista a consultar a app num telemóvel enquanto aguarda passageiro" loading="lazy">
+          </picture>
+          <figcaption>Painéis digitais que colocam os condutores no controlo.</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <picture>
+            <source srcset="assets/media/gallery-3.png" type="image/png">
+            <img src="assets/media/gallery-3.png" alt="Carro premium a circular numa avenida iluminada à noite" loading="lazy">
+          </picture>
+          <figcaption>Cidades com veículos sempre em movimento.</figcaption>
+        </figure>
       </div>
     </section>
 

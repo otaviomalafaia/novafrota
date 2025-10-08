@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
+  <defs>
+    <linearGradient id="g2-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#100c1f"/>
+      <stop offset="55%" stop-color="#231b3b"/>
+      <stop offset="100%" stop-color="#0a0a18"/>
+    </linearGradient>
+    <linearGradient id="g2-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7ad8"/>
+      <stop offset="55%" stop-color="#7a5bff"/>
+      <stop offset="100%" stop-color="#4cf0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="900" fill="url(#g2-bg)"/>
+  <rect x="250" y="200" width="400" height="500" rx="36" fill="#0c0f24" stroke="url(#g2-accent)" stroke-width="14"/>
+  <rect x="310" y="290" width="280" height="220" rx="18" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="450" cy="400" r="90" fill="none" stroke="url(#g2-accent)" stroke-width="14" stroke-dasharray="16 18"/>
+  <path d="M410 400l40 38 58-78" stroke="#4cf0ff" stroke-width="14" stroke-linecap="round" fill="none"/>
+  <path d="M640 360c60 40 96 108 96 182" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M610 300c74 44 122 122 122 210" fill="none" stroke="rgba(122,91,255,0.35)" stroke-width="16" stroke-linecap="round"/>
+  <text x="70" y="780" fill="rgba(255,255,255,0.35)" font-family="Inter, sans-serif" font-size="34" font-weight="600" letter-spacing="0.24em">
+    GALLERY 02 PLACEHOLDER
+  </text>
+  <text x="70" y="828" fill="rgba(255,255,255,0.22)" font-family="Inter, sans-serif" font-size="24" letter-spacing="0.18em">
+    Substitua por gallery-2.jpg
+  </text>
+</svg>
