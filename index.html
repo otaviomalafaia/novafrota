@@ -223,17 +223,27 @@
     }
 
     .hero-form {
-      display: flex;
-      align-items: center;
+      display: grid;
       gap: 12px;
-      padding: 12px 16px;
+      padding: 16px;
       border-radius: var(--radius-md);
       background: var(--surface-alt);
       border: 1px solid var(--stroke);
       max-width: 520px;
     }
 
-    .hero-form input {
+    .hero-form[aria-busy="true"] {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .form-fields {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .form-fields input {
       flex: 1;
       background: transparent;
       border: 0;
@@ -243,7 +253,7 @@
       font-family: inherit;
     }
 
-    .hero-form input::placeholder {
+    .form-fields input::placeholder {
       color: rgba(26, 28, 31, 0.4);
     }
 
@@ -264,6 +274,31 @@
     .hero-form button:focus-visible {
       transform: translateY(-1px);
       box-shadow: 0 22px 40px -28px rgba(17, 17, 17, 0.55);
+    }
+
+    .form-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .form-consent input {
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid var(--stroke);
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .form-consent a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
     }
 
     .hero-media {
@@ -502,6 +537,30 @@
       font-size: 0.9rem;
     }
 
+    .legal-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .legal-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .legal-list li::before {
+      content: '•';
+      color: var(--accent);
+      font-size: 1.1rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
     .trust-grid {
       max-width: 1100px;
       margin: 0 auto;
@@ -524,6 +583,11 @@
       margin: 0;
       font-size: 1.1rem;
       font-weight: 600;
+    }
+
+    .legal-note {
+      font-size: 0.8rem;
+      color: var(--muted);
     }
 
     .cta-block {
@@ -653,13 +717,13 @@
         justify-content: center;
       }
 
-      .hero-form {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
       .hero-form button {
         width: 100%;
+      }
+
+      .form-fields {
+        flex-direction: column;
+        align-items: stretch;
       }
 
       .hero-media {
@@ -729,6 +793,7 @@
         <a href="#beneficios">Para quem é</a>
         <a href="#seguranca">Confiança</a>
         <a href="#app">Aplicação</a>
+        <a href="#privacidade">Privacidade</a>
       </nav>
       <a class="cta-header" href="#contacto">Quero testar</a>
     </div>
@@ -738,17 +803,24 @@
     <section class="hero" id="hero">
       <div class="inner">
         <div class="hero-copy">
-          <div class="accent-bar">Mobilidade partilhada</div>
+          <div class="accent-bar">Mobilidade partilhada · sem fricção</div>
           <h1>Rentabilize o seu carro nas horas paradas.</h1>
           <p>NovaFrota conecta proprietários e condutores verificados para alugueres sob medida: por hora, por dia ou nos períodos em que o carro estaria parado. Mais rendimento para uns, mais liberdade para outros.</p>
           <ul class="hero-list">
-            <li><span>1</span> Defina horários, limites e preços.</li>
-            <li><span>2</span> Acompanhe a localização aproximadado veículo em tempo real durante o aluguer.</li>
-            <li><span>3</span> Acompanhe quilometragem e avaliações dos motoristas.</li>
+            <li><span>1</span> Defina horários, limites e preço em minutos.</li>
+            <li><span>2</span> Acompanhe a localização do veículo em tempo real durante o aluguer.</li>
+            <li><span>3</span> Acompanhe entregas, quilometragem e avaliações.</li>
           </ul>
-          <form class="hero-form" data-form>
-            <input type="email" name="email" aria-label="O seu email" placeholder="Deixe o seu email para entrar na beta" required>
-            <button type="submit">Entrar na lista</button>
+          <form class="hero-form" data-form data-endpoint="/api/leads">
+            <div class="form-fields">
+              <input type="email" name="email" aria-label="O seu email" placeholder="Deixe o seu email para entrar na beta" required>
+              <input type="hidden" name="consentTimestamp" value="">
+              <button type="submit">Entrar na lista</button>
+            </div>
+            <label class="form-consent">
+              <input type="checkbox" name="consent" required>
+              <span>Confirmo que li e aceito a <a href="#privacidade">Política de Privacidade</a> e autorizo o tratamento do meu email para receber comunicações sobre a NovaFrota.</span>
+            </label>
           </form>
           <div class="feedback" data-feedback aria-live="polite"></div>
         </div>
@@ -902,6 +974,51 @@
       </div>
     </section>
 
+    <section class="section" id="privacidade">
+      <div class="section-header">
+        <h2>Privacidade e GDPR</h2>
+        <p>Tratamos dados pessoais com transparência, minimização e segurança. Só recolhemos a informação indispensável para comunicar consigo sobre a NovaFrota e respeitamos todos os direitos previstos no RGPD.</p>
+      </div>
+      <div class="grid columns-2">
+        <article class="card">
+          <span class="badge">Responsável</span>
+          <h3>Controlador de dados</h3>
+          <p>A NovaFrota é responsável pelo tratamento dos dados recolhidos neste site. Pode contactar o nosso Encarregado de Proteção de Dados através de <a href="mailto:support@novafrota.pt">support@novafrota.pt</a> para qualquer questão relacionada com privacidade.</p>
+          <p class="legal-note">Base legal: consentimento explícito (Art.º 6.º, n.º 1, alínea a) do RGPD) e interesse legítimo para manter a segurança do serviço.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Minimização</span>
+          <h3>Dados recolhidos</h3>
+          <ul class="legal-list">
+            <li>Email fornecido voluntariamente para envio de convites, novidades e respostas a pedidos de contacto.</li>
+            <li>Metadados técnicos mínimos (por exemplo, registos de segurança) agregados e anonimizados para garantir a estabilidade do site.</li>
+            <li>Registo do momento do consentimento (timestamp) e user agent para auditoria de conformidade.</li>
+          </ul>
+          <p class="legal-note">Nunca partilhamos os seus dados com terceiros para marketing sem novo consentimento.</p>
+        </article>
+      </div>
+      <div class="grid columns-2">
+        <article class="card">
+          <span class="badge">Direitos</span>
+          <h3>Os seus direitos</h3>
+          <ul class="legal-list">
+            <li>Acesso, retificação ou apagamento dos dados pessoais.</li>
+            <li>Limitação ou oposição ao tratamento dos dados.</li>
+            <li>Portabilidade dos dados para outro responsável.</li>
+            <li>Retirada do consentimento a qualquer altura sem afetar a licitude do tratamento já efetuado.</li>
+            <li>Apresentar reclamação junto da autoridade de controlo (CNPD em Portugal).</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span class="badge">Retenção</span>
+          <h3>Retenção e cookies</h3>
+          <p>Conservamos o seu email apenas enquanto mantivermos comunicações relevantes ou até exercer o direito de apagamento. Se nada ouvir da nossa parte em 24 meses, removemos o contacto.</p>
+          <p class="legal-note">Este site não utiliza cookies de rastreamento ou perfis comportamentais; apenas recursos técnicos essenciais para o funcionamento. Os registos locais de consentimento guardados no seu navegador podem ser eliminados a qualquer momento limpando a cache.</p>
+        </article>
+      </div>
+      <p class="legal-note">Última atualização: Abril de 2025. Para exercer qualquer direito, contacte <a href="mailto:support@novafrota.pt">support@novafrota.pt</a>.</p>
+    </section>
+
     <section class="section" id="app">
       <div class="section-header">
         <h2>Aplicação pronta para escalar</h2>
@@ -934,7 +1051,7 @@
       <div class="cta-block">
         <p>Partilhe algumas informações sobre o seu caso de uso e entraremos em contacto com prioridade. Quer criar rendimento extra ao partilhar o carro? Quer acesso fácil a uma frota urbana? A equipa NovaFrota quer perceber a sua necessidade.</p>
         <div class="button-row">
-          <a class="button primary" href="mailto:beta@novafrota.pt?subject=Quero%20participar%20na%20beta%20NovaFrota">Falar com a equipa</a>
+          <a class="button primary" href="mailto:support@novafrota.pt?subject=Quero%20participar%20na%20beta%20NovaFrota">Falar com a equipa</a>
           <a class="button" href="#hero">Ver demo</a>
         </div>
       </div>
@@ -950,6 +1067,7 @@
         <a href="#seguranca">Segurança</a>
         <a href="#app">App</a>
         <a href="#contacto">Contacto</a>
+        <a href="#privacidade">Privacidade</a>
       </nav>
       <small>NovaFrota © <span id="year"></span> · Mobilidade partilhada, segura e inteligente.</small>
     </div>
@@ -972,10 +1090,15 @@
     }
 
     if (form && feedback) {
-      form.addEventListener('submit', (event) => {
+      form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const emailField = form.elements.email;
+        const consentField = form.elements.consent;
+        const consentTimestampField = form.elements.consentTimestamp;
+        const submitButton = form.querySelector('button[type="submit"]');
+        const endpoint = form.dataset.endpoint || '/api/leads';
         const email = emailField.value.trim();
+        feedback.classList.remove('is-visible');
 
         if (!email) {
           feedback.textContent = 'Introduza um email válido para receber o convite.';
@@ -983,13 +1106,71 @@
           return;
         }
 
-        feedback.textContent = 'Obrigado! Entraremos em contacto com novidades da beta.';
-        feedback.classList.add('is-visible');
-        form.reset();
+        if (!consentField || !consentField.checked) {
+          feedback.textContent = 'Confirme que aceita a Política de Privacidade para continuarmos.';
+          feedback.classList.add('is-visible');
+          return;
+        }
+
+        const consentTimestamp = new Date().toISOString();
+        if (consentTimestampField) {
+          consentTimestampField.value = consentTimestamp;
+        }
+
+        const payload = {
+          email,
+          consent: true,
+          consentTimestamp,
+          userAgent: navigator.userAgent
+        };
+
+        form.setAttribute('aria-busy', 'true');
+        if (submitButton) {
+          submitButton.setAttribute('disabled', 'disabled');
+        }
+
+        try {
+          const stored = JSON.parse(localStorage.getItem('novafrota-consents') || '[]');
+          stored.push(payload);
+          localStorage.setItem('novafrota-consents', JSON.stringify(stored));
+        } catch (storageError) {
+          console.warn('Não foi possível guardar o registo localmente.', storageError);
+        }
+
+        let requestSucceeded = false;
+
+        if (typeof fetch === 'function') {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payload)
+            });
+            requestSucceeded = response.ok;
+          } catch (networkError) {
+            console.warn('Falha ao comunicar com o servidor de leads.', networkError);
+          }
+        }
+
+        if (requestSucceeded) {
+          feedback.textContent = 'Obrigado! Entraremos em contacto com novidades da beta.';
+          feedback.classList.add('is-visible');
+          form.reset();
+        } else {
+          feedback.textContent = 'Guardámos o seu pedido localmente. Caso não receba resposta em 24h, envie-nos um email para support@novafrota.pt.';
+          feedback.classList.add('is-visible');
+        }
+
+        form.removeAttribute('aria-busy');
+        if (submitButton) {
+          submitButton.removeAttribute('disabled');
+        }
 
         setTimeout(() => {
           feedback.classList.remove('is-visible');
-        }, 4000);
+        }, 6000);
       });
     }
   </script>
