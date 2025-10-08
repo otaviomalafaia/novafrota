@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Cookies | NovaFrota</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-alt: #eef1f7;
+      --stroke: rgba(12, 20, 30, 0.08);
+      --stroke-strong: rgba(12, 20, 30, 0.16);
+      --text: #1a1c1f;
+      --muted: #5d6975;
+      --accent: #111111;
+      --accent-contrast: #ffffff;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow-soft: 0 24px 48px -32px rgba(17, 17, 17, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      border-bottom: 1px solid var(--stroke);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    header a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+      display: grid;
+      gap: 28px;
+    }
+
+    h1, h2 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin: 32px 0 12px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      gap: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--stroke);
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    th {
+      background: var(--surface-alt);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .legal-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      header .inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .card {
+        padding: 24px;
+      }
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="inner">
+      <strong>NovaFrota</strong>
+      <nav>
+        <a href="index.html">Voltar ao site</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h1>Política de Cookies</h1>
+      <p>Esta política descreve como a NovaFrota utiliza cookies e tecnologias similares no website novafrota.pt. Pretendemos garantir transparência e permitir que escolha facilmente as suas preferências.</p>
+      <p class="legal-note">Última atualização: Abril de 2025. Contacto: <a href="mailto:support@novafrota.pt">support@novafrota.pt</a>.</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Conceitos</span>
+      <h2>O que são cookies?</h2>
+      <p>Cookies são pequenos ficheiros de texto que podem ser armazenados no seu dispositivo quando visita um website. Servem para memorizar preferências, garantir funcionalidades essenciais e analisar desempenho.</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Categorias</span>
+      <h2>Que tipos de cookies utilizamos?</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Finalidade</th>
+            <th>Duração</th>
+            <th>Terceiros</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Essenciais</td>
+            <td>Garantir o funcionamento do site, lembrar preferências de consentimento e proteger o formulário contra abuso.</td>
+            <td>Persistentes (até 24 meses) ou enquanto necessários.</td>
+            <td>Não aplicável.</td>
+          </tr>
+          <tr>
+            <td>Medição anónima (opcional)</td>
+            <td>Medir visitas e interações de forma agregada, sem identificar utilizadores. Apenas ativados com consentimento.</td>
+            <td>Até 13 meses.</td>
+            <td>Nesta fase não utilizamos fornecedores externos. Caso venhamos a integrar ferramentas analíticas, a lista será atualizada.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="legal-note">Não instalamos cookies de marketing ou personalização sem consentimento prévio. Se novos fornecedores forem adicionados, esta tabela será atualizada com links para as respetivas políticas e mecanismos de opt-out.</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Gestão</span>
+      <h2>Como gerir ou alterar o consentimento</h2>
+      <ul>
+        <li>No nosso site: utilize o banner de preferências ou o botão “Gerir cookies” no rodapé (Secção Privacidade & GDPR) para atualizar a sua escolha.</li>
+        <li>No navegador: pode remover cookies através das definições do seu browser. Veja instruções em <a href="https://www.aboutcookies.org/" target="_blank" rel="noopener noreferrer">aboutcookies.org</a>.</li>
+        <li>Caso desative cookies essenciais, algumas funcionalidades (ex.: formulário) podem deixar de funcionar corretamente.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <span class="badge">Terceiras partes</span>
+      <h2>Integrações externas</h2>
+      <p>Atualmente não partilhamos cookies com terceiros nem utilizamos scripts que criem perfis de comportamento. Se futuramente integrarmos serviços externos (ex.: analytics, suporte, marketing), iremos:</p>
+      <ul>
+        <li>Atualizar esta política com o nome do fornecedor, finalidade, tipo de dados e link para a política do mesmo.</li>
+        <li>Solicitar consentimento explícito antes de ativar esses cookies.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <span class="badge">Direitos</span>
+      <h2>Os seus direitos</h2>
+      <p>Em conformidade com o RGPD, pode solicitar acesso, correção ou eliminação dos seus dados pessoais, bem como retirar o consentimento a qualquer momento. Para exercer estes direitos, contacte-nos via <a href="mailto:support@novafrota.pt">support@novafrota.pt</a>.</p>
+    </section>
+  </main>
+</body>
+</html>

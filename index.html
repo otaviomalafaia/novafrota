@@ -756,6 +756,21 @@
       color: var(--muted);
     }
 
+    .footer-manage {
+      background: none;
+      border: 0;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-manage:hover,
+    .footer-manage:focus-visible {
+      text-decoration: underline;
+    }
+
     @media (max-width: 960px) {
       .site-header .inner {
         flex-wrap: wrap;
@@ -865,6 +880,8 @@
         <a href="#seguranca">Confiança</a>
         <a href="#app">Aplicação</a>
         <a href="privacidade.html">Privacidade</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="termos.html">Termos</a>
       </nav>
       <a class="cta-header" href="#contacto">Quero testar</a>
     </div>
@@ -1084,7 +1101,7 @@
     </section>
   </main>
 
-  <div class="cookie-banner is-hidden" role="dialog" aria-live="polite" aria-modal="false" data-cookie-banner>
+  <div class="cookie-banner is-hidden" role="dialog" aria-live="polite" aria-modal="false" tabindex="-1" data-cookie-banner>
     <div>
       <strong>Preferências de privacidade</strong>
       <p>Usamos cookies estritamente necessários para que o site funcione. Opcionalmente, podemos usar métricas anónimas para melhorar a experiência.</p>
@@ -1093,7 +1110,7 @@
       <button type="button" class="accept" data-cookie-accept>Aceitar tudo</button>
       <button type="button" data-cookie-decline>Apenas essenciais</button>
     </div>
-    <p class="legal-note">Pode rever ou alterar o consentimento a qualquer momento em <a href="privacidade.html">Privacidade & GDPR</a>.</p>
+    <p class="legal-note">Pode rever ou alterar o consentimento a qualquer momento em <a href="privacidade.html">Privacidade & GDPR</a> ou consultar a <a href="cookies.html">Política de Cookies</a>.</p>
   </div>
 
   <footer>
@@ -1106,6 +1123,9 @@
         <a href="#app">App</a>
         <a href="#contacto">Contacto</a>
         <a href="privacidade.html">Privacidade</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="termos.html">Termos</a>
+        <button type="button" class="footer-manage" data-cookie-manage>Gerir cookies</button>
       </nav>
       <small>NovaFrota © <span id="year"></span> · Mobilidade partilhada, segura e inteligente.</small>
     </div>
@@ -1119,6 +1139,7 @@
     const cookieBanner = document.querySelector('[data-cookie-banner]');
     const cookieAcceptBtn = document.querySelector('[data-cookie-accept]');
     const cookieDeclineBtn = document.querySelector('[data-cookie-decline]');
+    const cookieManageButtons = document.querySelectorAll('[data-cookie-manage]');
     const COOKIE_KEY = 'novafrota-cookie-consent';
 
     if (yearEl) {
@@ -1164,6 +1185,10 @@
       if (cookieBanner) {
         cookieBanner.classList.remove('is-hidden');
         cookieBanner.removeAttribute('aria-hidden');
+        cookieBanner.focus?.();
+        if (cookieAcceptBtn) {
+          cookieAcceptBtn.focus();
+        }
       }
     }
 
@@ -1185,6 +1210,14 @@
       cookieDeclineBtn.addEventListener('click', () => {
         storeCookiePreference('essential-only');
         hideCookieBanner();
+      });
+    }
+
+    if (cookieManageButtons.length > 0) {
+      cookieManageButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          showCookieBanner();
+        });
       });
     }
 
