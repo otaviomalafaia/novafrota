@@ -42,6 +42,41 @@
       line-height: 1.6;
     }
 
+    .skip-link {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -200%);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+      z-index: 100;
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus-visible {
+      transform: translate(-50%, 12px);
+    }
+
+    :focus-visible {
+      outline: 3px solid #1a6ef5;
+      outline-offset: 3px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      border: 0;
+      white-space: nowrap;
+    }
+
     main {
       position: relative;
       z-index: 1;
@@ -255,7 +290,6 @@
       border: 0;
       color: var(--text);
       font-size: 0.95rem;
-      outline: none;
       font-family: inherit;
     }
 
@@ -970,6 +1004,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#conteudo-principal">Saltar para o conteúdo principal</a>
   <header class="site-header" data-header>
     <div class="inner">
       <a class="logo" href="#hero" aria-label="NovaFrota Início">
@@ -986,7 +1021,7 @@
         </svg>
         <span class="logo-text">NovaFrota</span>
       </a>
-      <nav class="nav-links" aria-label="Navegação principal">
+      <nav class="nav-links" aria-label="Navegação principal" data-nav>
         <a href="#como-funciona">Como funciona</a>
         <a href="#beneficios">Para quem é</a>
         <a href="#seguranca">Confiança</a>
@@ -996,7 +1031,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo-principal" tabindex="-1">
     <section class="hero" id="hero">
       <div class="inner">
         <div class="hero-copy">
@@ -1009,18 +1044,19 @@
             <li><span>2</span> Acompanhe a localização aproximada do veículo em tempo real durante o aluguer.</li>
             <li><span>3</span> Acompanhe quilometragem e avaliações.</li>
           </ul>
-          <form class="hero-form" data-form data-endpoint="/api/leads">
+          <form class="hero-form" data-form data-endpoint="/api/leads" novalidate>
             <div class="form-fields">
-              <input type="email" name="email" aria-label="O seu email" placeholder="Deixe o seu email para entrar na beta" required>
+              <label class="visually-hidden" for="hero-email">O seu email</label>
+              <input id="hero-email" type="email" name="email" placeholder="Deixe o seu email para entrar na beta" autocomplete="email" required aria-describedby="hero-form-feedback">
               <input type="hidden" name="consentTimestamp" value="">
               <button type="submit">Entrar na lista</button>
             </div>
             <label class="form-consent">
-              <input type="checkbox" name="consent" required>
-              <span>Confirmo que li e aceito a <a href="privacidade.html">Política de Privacidade</a> e autorizo o tratamento do meu email para receber comunicações sobre a NovaFrota.</span>
+              <input type="checkbox" name="consent" required aria-describedby="hero-form-feedback consent-text">
+              <span id="consent-text">Confirmo que li e aceito a <a href="privacidade.html">Política de Privacidade</a> e autorizo o tratamento do meu email para receber comunicações sobre a NovaFrota.</span>
             </label>
           </form>
-          <div class="feedback" data-feedback aria-live="polite"></div>
+          <div class="feedback" data-feedback id="hero-form-feedback" aria-live="polite" role="status"></div>
         </div>
         <div class="hero-media">
           <picture class="hero-visual">
@@ -1042,7 +1078,7 @@
                   <span>Hoje · 12:30 → 18:30</span>
                   <span>€48</span>
                 </div>
-                <div class="progress" style="--progress: 0.75;"></div>
+                <div class="progress" style="--progress: 0.75;" aria-hidden="true"></div>
                 <div class="ride-meta">
                   <span>Condutor: Leonor A.</span>
                   <span>Estado: Em curso</span>
@@ -1054,7 +1090,7 @@
                   <span>Amanhã · 08:00 → 13:00</span>
                   <span>€32</span>
                 </div>
-                <div class="progress" style="--progress: 0.35;"></div>
+                <div class="progress" style="--progress: 0.35;" aria-hidden="true"></div>
                 <div class="ride-meta">
                   <span>Condutor: Miguel R.</span>
                   <span>Aguardar resposta</span>
@@ -1245,21 +1281,21 @@
     </section>
   </main>
 
-  <div class="cookie-banner is-hidden" role="dialog" aria-live="polite" aria-modal="false" tabindex="-1" data-cookie-banner>
+  <div class="cookie-banner is-hidden" role="dialog" aria-live="polite" aria-modal="false" aria-hidden="true" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-description cookie-banner-note" tabindex="-1" data-cookie-banner>
     <div>
-      <strong>Preferências de privacidade</strong>
-      <p>Usamos cookies estritamente necessários para que o site funcione. Opcionalmente, podemos usar métricas anónimas para melhorar a experiência.</p>
+      <strong id="cookie-banner-title">Preferências de privacidade</strong>
+      <p id="cookie-banner-description">Usamos cookies estritamente necessários para que o site funcione. Opcionalmente, podemos usar métricas anónimas para melhorar a experiência.</p>
     </div>
     <div class="cookie-actions">
       <button type="button" class="accept" data-cookie-accept>Aceitar tudo</button>
       <button type="button" data-cookie-decline>Apenas essenciais</button>
     </div>
-    <p class="legal-note">Pode rever ou alterar o consentimento a qualquer momento em <a href="privacidade.html">Privacidade & GDPR</a> ou consultar a <a href="cookies.html">Política de Cookies</a>.</p>
+    <p class="legal-note" id="cookie-banner-note">Pode rever ou alterar o consentimento a qualquer momento em <a href="privacidade.html">Privacidade & GDPR</a> ou consultar a <a href="cookies.html">Política de Cookies</a>.</p>
   </div>
 
   <footer>
     <div class="inner">
-      <nav>
+      <nav aria-label="Navegação do rodapé">
         <a href="#hero">Início</a>
         <a href="#como-funciona">Fluxo</a>
         <a href="#beneficios">Benefícios</a>
@@ -1268,6 +1304,7 @@
         <a href="#contacto">Contacto</a>
         <a href="privacidade.html">Privacidade</a>
         <a href="cookies.html">Cookies</a>
+        <a href="acessibilidade.html">Acessibilidade</a>
         <a href="termos.html">Termos</a>
         <button type="button" class="footer-manage" data-cookie-manage>Gerir cookies</button>
       </nav>
@@ -1284,6 +1321,15 @@
     const cookieAcceptBtn = document.querySelector('[data-cookie-accept]');
     const cookieDeclineBtn = document.querySelector('[data-cookie-decline]');
     const cookieManageButtons = document.querySelectorAll('[data-cookie-manage]');
+    const mainNav = document.querySelector('[data-nav]');
+    const navLinks = mainNav ? Array.from(mainNav.querySelectorAll('a[href^="#"]')) : [];
+    const trackedSections = navLinks.length > 0
+      ? Array.from(document.querySelectorAll('main section[id]'))
+          .filter((section) => navLinks.some((link) => link.getAttribute('href') === `#${section.id}`))
+      : [];
+    const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let releaseCookieFocusTrap = null;
+    let lastFocusedBeforeCookie = null;
     const COOKIE_KEY = 'novafrota-cookie-consent';
 
     if (yearEl) {
@@ -1294,6 +1340,46 @@
       window.addEventListener('scroll', () => {
         header.classList.toggle('is-scrolled', window.scrollY > 10);
       }, { passive: true });
+    }
+
+    function updateActiveNav(sectionId) {
+      if (navLinks.length === 0 || !sectionId) {
+        return;
+      }
+      navLinks.forEach((link) => {
+        if (link.getAttribute('href') === `#${sectionId}`) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    if (navLinks.length > 0) {
+      if ('IntersectionObserver' in window && trackedSections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries.filter((entry) => entry.isIntersecting);
+          if (visible.length > 0) {
+            visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+            updateActiveNav(visible[0].target.id);
+          }
+        }, { threshold: 0.5 });
+
+        trackedSections.forEach((section) => observer.observe(section));
+      }
+
+      window.addEventListener('hashchange', () => {
+        const targetId = window.location.hash.replace('#', '');
+        if (targetId) {
+          updateActiveNav(targetId);
+        }
+      });
+
+      if (window.location.hash) {
+        updateActiveNav(window.location.hash.replace('#', ''));
+      } else if (trackedSections[0]) {
+        updateActiveNav(trackedSections[0].id);
+      }
     }
 
     function storeCookiePreference(value) {
@@ -1318,20 +1404,67 @@
       }
     }
 
+    function activateFocusTrap(container) {
+      const focusable = Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR));
+      if (focusable.length === 0) {
+        return () => {};
+      }
+
+      function handleKeydown(event) {
+        if (event.key !== 'Tab') {
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey) {
+          if (document.activeElement === first || document.activeElement === container) {
+            event.preventDefault();
+            last.focus();
+          }
+        } else if (document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+
+      container.addEventListener('keydown', handleKeydown);
+
+      return () => {
+        container.removeEventListener('keydown', handleKeydown);
+      };
+    }
+
     function hideCookieBanner() {
       if (cookieBanner) {
         cookieBanner.classList.add('is-hidden');
         cookieBanner.setAttribute('aria-hidden', 'true');
+        cookieBanner.setAttribute('aria-modal', 'false');
+        if (typeof releaseCookieFocusTrap === 'function') {
+          releaseCookieFocusTrap();
+          releaseCookieFocusTrap = null;
+        }
+        if (lastFocusedBeforeCookie && typeof lastFocusedBeforeCookie.focus === 'function') {
+          lastFocusedBeforeCookie.focus();
+        }
+        lastFocusedBeforeCookie = null;
       }
     }
 
     function showCookieBanner() {
       if (cookieBanner) {
+        if (typeof releaseCookieFocusTrap === 'function') {
+          releaseCookieFocusTrap();
+        }
         cookieBanner.classList.remove('is-hidden');
-        cookieBanner.removeAttribute('aria-hidden');
-        cookieBanner.focus?.();
-        if (cookieAcceptBtn) {
-          cookieAcceptBtn.focus();
+        cookieBanner.setAttribute('aria-hidden', 'false');
+        cookieBanner.setAttribute('aria-modal', 'true');
+        lastFocusedBeforeCookie = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        releaseCookieFocusTrap = activateFocusTrap(cookieBanner);
+        const focusTarget = cookieAcceptBtn || cookieBanner.querySelector(FOCUSABLE_SELECTOR) || cookieBanner;
+        if (focusTarget && typeof focusTarget.focus === 'function') {
+          focusTarget.focus();
         }
       }
     }
@@ -1366,27 +1499,57 @@
     }
 
     if (form && feedback) {
+      const emailField = form.elements.email;
+      const consentField = form.elements.consent;
+      const consentTimestampField = form.elements.consentTimestamp;
+
+      if (emailField) {
+        emailField.addEventListener('input', () => {
+          emailField.removeAttribute('aria-invalid');
+        });
+      }
+
+      if (consentField) {
+        consentField.addEventListener('change', () => {
+          consentField.removeAttribute('aria-invalid');
+        });
+      }
+
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const emailField = form.elements.email;
-        const consentField = form.elements.consent;
-        const consentTimestampField = form.elements.consentTimestamp;
-        const submitButton = form.querySelector('button[type="submit"]');
-        const endpoint = form.dataset.endpoint || '/api/leads';
-        const email = emailField.value.trim();
-        feedback.classList.remove('is-visible');
-
-        if (!email) {
-          feedback.textContent = 'Introduza um email válido para receber o convite.';
-          feedback.classList.add('is-visible');
+        if (!emailField) {
           return;
         }
 
+        const submitButton = form.querySelector('button[type="submit"]');
+        const endpoint = form.dataset.endpoint || '/api/leads';
+        feedback.classList.remove('is-visible');
+        feedback.textContent = '';
+
+        const email = emailField.value.trim();
+        emailField.value = email;
+
+        if (!emailField.validity.valid) {
+          emailField.setAttribute('aria-invalid', 'true');
+          feedback.textContent = 'Introduza um email válido para receber o convite.';
+          feedback.classList.add('is-visible');
+          emailField.focus();
+          return;
+        }
+
+        emailField.removeAttribute('aria-invalid');
+
         if (!consentField || !consentField.checked) {
+          if (consentField) {
+            consentField.setAttribute('aria-invalid', 'true');
+            consentField.focus();
+          }
           feedback.textContent = 'Confirme que aceita a Política de Privacidade para continuarmos.';
           feedback.classList.add('is-visible');
           return;
         }
+
+        consentField.removeAttribute('aria-invalid');
 
         const consentTimestamp = new Date().toISOString();
         if (consentTimestampField) {
@@ -1446,6 +1609,7 @@
 
         setTimeout(() => {
           feedback.classList.remove('is-visible');
+          feedback.textContent = '';
         }, 6000);
       });
     }

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Declaração de Acessibilidade | NovaFrota</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-alt: #eef1f7;
+      --stroke: rgba(12, 20, 30, 0.08);
+      --stroke-strong: rgba(12, 20, 30, 0.16);
+      --text: #1a1c1f;
+      --muted: #38424f;
+      --accent: #111111;
+      --accent-contrast: #ffffff;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow-soft: 0 24px 48px -32px rgba(17, 17, 17, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -200%);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+      z-index: 100;
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus-visible {
+      transform: translate(-50%, 12px);
+    }
+
+    :focus-visible {
+      outline: 3px solid #1a6ef5;
+      outline-offset: 3px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--stroke);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    header a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+      display: grid;
+      gap: 28px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      margin: 40px 0 12px;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      gap: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .legal-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    address {
+      font-style: normal;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 720px) {
+      header .inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Saltar para o conteúdo principal</a>
+  <header>
+    <div class="inner">
+      <strong>NovaFrota</strong>
+      <nav>
+        <a href="index.html">Voltar ao site</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" tabindex="-1">
+    <header>
+      <h1>Declaração de Acessibilidade</h1>
+      <p>Comprometemo-nos com a conformidade progressiva com a Lei Europeia da Acessibilidade (EAA) e o Decreto-Lei n.º 83/2018, garantindo que todos possam utilizar os conteúdos e serviços da NovaFrota.</p>
+      <p class="legal-note">Última atualização: Maio de 2025. Esta declaração foi preparada a 20 de Maio de 2025.</p>
+    </header>
+
+    <section class="card">
+      <span class="badge">Estado</span>
+      <h2>Estado de conformidade</h2>
+      <p>O website novafrota.pt está em conformidade parcial com a norma harmonizada EN 301 549 v3.2.1. Continuamos a trabalhar para resolver as restantes não-conformidades identificadas.</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Melhorias em curso</span>
+      <h2>Conteúdos e funcionalidades não acessíveis</h2>
+      <p>As situações listadas serão resolvidas nos próximos ciclos de desenvolvimento:</p>
+      <ul>
+        <li>Alguns conteúdos multimédia ainda não possuem legendas ou transcrições equivalentes.</li>
+        <li>Documentos PDF legados não foram convertidos para formatos totalmente acessíveis.</li>
+        <li>Validações de formulários nas páginas secundárias estão em revisão para garantir mensagens equivalentes em tecnologias de apoio.</li>
+      </ul>
+      <p class="legal-note">Fundamento: artigo 4.º do Decreto-Lei n.º 83/2018 (encargos desproporcionados temporários).</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Feedback</span>
+      <h2>Comunicar problemas ou pedir alternativas</h2>
+      <p>Se encontrar alguma barreira ou precisar de conteúdos num formato alternativo, contacte-nos. Respondemos num prazo máximo de 15 dias úteis.</p>
+      <address>
+        Email: <a href="mailto:support@novafrota.pt">support@novafrota.pt</a><br>
+        Assunto: “Acessibilidade digital NovaFrota”
+      </address>
+    </section>
+
+    <section class="card">
+      <span class="badge">Procedimento</span>
+      <h2>Mecanismo de recurso</h2>
+      <p>Se não receber resposta adequada, pode apresentar reclamação junto da Agência para a Modernização Administrativa, I.P. (AMA), entidade responsável pela monitorização da acessibilidade digital em Portugal.</p>
+      <address>
+        Website: <a href="https://www.acessibilidade.gov.pt" target="_blank" rel="noopener">acessibilidade.gov.pt</a><br>
+        Email: <a href="mailto:acessibilidade@ama.pt">acessibilidade@ama.pt</a>
+      </address>
+    </section>
+  </main>
+</body>
+</html>
