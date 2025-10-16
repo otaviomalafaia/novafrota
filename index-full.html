@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NovaFrota liga proprietários e condutores para partilha de veículos em horas mortas. Ganhe ao partilhar o seu carro com confiança total.">
+  <title>NovaFrota — Ganhe dinheiro quando não usa o seu carro.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-alt: #eef1f7;
+      --stroke: rgba(12, 20, 30, 0.08);
+      --stroke-strong: rgba(12, 20, 30, 0.16);
+      --text: #1a1c1f;
+      --muted: #5d6975;
+      --accent: #111111;
+      --accent-contrast: #ffffff;
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow-soft: 0 24px 48px -32px rgba(17, 17, 17, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -200%);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+      z-index: 100;
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus-visible {
+      transform: translate(-50%, 12px);
+    }
+
+    :focus-visible {
+      outline: 3px solid #1a6ef5;
+      outline-offset: 3px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      border: 0;
+      white-space: nowrap;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--accent);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid transparent;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .site-header.is-scrolled {
+      border-color: var(--stroke);
+      box-shadow: 0 18px 36px -28px rgba(12, 26, 35, 0.45);
+    }
+
+    .site-header .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .logo-text {
+      color: var(--accent);
+    }
+
+    .logo svg {
+      width: 60px;
+      height: 36px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a::after,
+    .nav-links button::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after,
+    .nav-links button:hover::after,
+    .nav-links button:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .cta-header {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-header:hover,
+    .cta-header:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px -24px rgba(255, 255, 255, 0.8);
+    }
+
+    .hero {
+      padding: 120px 24px 140px;
+    }
+
+    .hero .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 80px;
+      align-items: center;
+    }
+
+    .accent-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy h1 {
+      margin: 22px 0 24px;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 3.9rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-copy p {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+    }
+
+    .hero-list {
+      list-style: none;
+      margin: 0 0 38px;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .hero-list span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .hero-form {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: var(--surface-alt);
+      border: 1px solid var(--stroke);
+      max-width: 520px;
+    }
+
+    .hero-form[aria-busy="true"] {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .form-fields {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .form-fields input {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .form-fields input::placeholder {
+      color: rgba(26, 28, 31, 0.4);
+    }
+
+    .hero-form button {
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      border: 0;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 18px 32px -28px rgba(17, 17, 17, 0.5);
+    }
+
+    .hero-form button:hover,
+    .hero-form button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 40px -28px rgba(17, 17, 17, 0.55);
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(76, 240, 255, 0.12);
+      border: 1px solid rgba(76, 240, 255, 0.35);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .form-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .form-consent input {
+      margin-top: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid var(--stroke);
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .form-consent a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .hero-media {
+      position: relative;
+      display: grid;
+      place-items: center;
+      gap: 24px;
+    }
+
+    .hero-media::before {
+      content: '';
+      position: absolute;
+      inset: 10% 5% auto 5%;
+      height: 70%;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--stroke);
+      background: var(--surface-alt);
+      box-shadow: var(--shadow-soft);
+      z-index: 0;
+    }
+
+    .hero-visual {
+      position: relative;
+      width: min(460px, 95%);
+      margin: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      z-index: 0;
+      box-shadow: var(--shadow-soft);
+      display: block;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      filter: saturate(1.05);
+    }
+
+    .hero-device {
+      position: relative;
+      width: min(380px, 90%);
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--stroke-strong);
+      box-shadow: var(--shadow-soft);
+      z-index: 1;
+      margin-top: -120px;
+      backdrop-filter: blur(4px);
+    }
+
+    .device-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .stat strong {
+      font-size: 1.7rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .rides {
+      display: grid;
+      gap: 16px;
+    }
+
+    .ride-card {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      display: grid;
+      gap: 14px;
+    }
+
+    .ride-card h4 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .ride-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .progress {
+      position: relative;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      overflow: hidden;
+    }
+
+    .progress::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform-origin: left;
+      transform: scaleX(var(--progress, 0.6));
+    }
+
+    .section {
+      padding: 0 24px 120px;
+    }
+
+    .section-header {
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header p {
+      margin: 0;
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .grid.columns-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid.columns-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      display: grid;
+      gap: 18px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover,
+    .card:focus-within {
+      transform: translateY(-4px);
+      border-color: var(--stroke-strong);
+      box-shadow: 0 28px 48px -36px rgba(17, 17, 17, 0.3);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      color: var(--accent);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .split {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .list li {
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-alt);
+      border: 1px solid var(--stroke);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .list li strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .list-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .legal-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .legal-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .legal-list li::before {
+      content: '•';
+      color: var(--accent);
+      font-size: 1.1rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .trust-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .trust-card {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      display: grid;
+      gap: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .trust-card h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .legal-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .gallery {
+      padding-top: 0;
+    }
+
+    .gallery-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-card {
+      margin: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--stroke);
+      display: grid;
+      gap: 0;
+      background: var(--surface);
+    }
+
+    .gallery-card picture {
+      display: block;
+      overflow: hidden;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-card figcaption {
+      padding: 16px 18px;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: none;
+      backdrop-filter: none;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+    }
+
+    .cta-block {
+      margin-top: 60px;
+      padding: 36px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-alt);
+      border: 1px solid var(--stroke);
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .cta-block p {
+      margin: 0;
+      color: var(--text);
+      font-size: 1.05rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--stroke);
+      background: transparent;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: transparent;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--stroke-strong);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      border-color: transparent;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .feedback.is-visible {
+      opacity: 1;
+    }
+
+    .cookie-banner {
+      position: fixed;
+      inset: auto 24px 24px 24px;
+      max-width: 420px;
+      display: grid;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow-soft);
+      color: var(--text);
+      transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      z-index: 20;
+    }
+
+    .cookie-banner.is-hidden {
+      transform: translateY(20px);
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .cookie-banner p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cookie-banner strong {
+      color: var(--text);
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-actions button {
+      flex: 1;
+      min-width: 140px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--stroke);
+      background: transparent;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cookie-actions button:hover,
+    .cookie-actions button:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--stroke-strong);
+    }
+
+    .cookie-actions .accept {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: transparent;
+    }
+
+    .cookie-actions .accept:hover,
+    .cookie-actions .accept:focus-visible {
+      border-color: transparent;
+    }
+
+    footer {
+      padding: 40px 24px 60px;
+      background: var(--surface);
+      border-top: 1px solid var(--stroke);
+      color: var(--muted);
+    }
+
+    footer .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    footer nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+
+    footer small {
+      color: var(--muted);
+    }
+
+    .footer-manage {
+      background: none;
+      border: 0;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .nav-links button {
+      background: none;
+      border: 0;
+      color: var(--muted);
+      font-weight: inherit;
+      font-size: 0.92rem;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .nav-links button:hover,
+    .nav-links button:focus-visible {
+      color: var(--accent);
+    }
+
+    .footer-manage:hover,
+    .footer-manage:focus-visible {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 960px) {
+      .site-header .inner {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero .inner {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
+      }
+
+      .hero-copy {
+        order: 2;
+      }
+
+      .hero-copy p,
+      .hero-list,
+      .hero-form {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-list li {
+        justify-content: center;
+      }
+
+      .hero-form button {
+        width: 100%;
+      }
+
+      .form-fields {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-media {
+        order: 1;
+      }
+
+      .hero-device {
+        margin-top: 0;
+      }
+
+      .grid.columns-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cta-block {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .button-row {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .grid.columns-3,
+      .grid.columns-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .site-header .inner {
+        padding: 16px 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001s !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Saltar para o conteúdo principal</a>
+  <header class="site-header" data-header>
+    <div class="inner">
+      <a class="logo" href="#hero" aria-label="NovaFrota Início">
+        <svg viewBox="0 0 180 90" role="img" aria-labelledby="logoTitle logoDesc">
+          <title id="logoTitle">NovaFrota</title>
+          <desc id="logoDesc">Logótipo minimalista com um carro estilizado e uma moeda a representar rendimento partilhado.</desc>
+          <circle cx="134" cy="34" r="18" fill="none" stroke="#111111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M22 50h12l14-22h54l14 22h12a16 16 0 0 1 16 16v12H14V66a16 16 0 0 1 16-16Z" fill="none" stroke="#111111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="46" cy="70" r="11" fill="none" stroke="#111111" stroke-width="6" />
+          <circle cx="102" cy="70" r="11" fill="none" stroke="#111111" stroke-width="6" />
+          <path d="M64 36h32" stroke="#111111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M134 24v20" stroke="#111111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M124 34h20" stroke="#111111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="logo-text">NovaFrota</span>
+      </a>
+      <nav class="nav-links" aria-label="Navegação principal" data-nav>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#beneficios">Para quem é</a>
+        <a href="#seguranca">Confiança</a>
+        <a href="#app">Aplicação</a>
+      </nav>
+      <a class="cta-header" href="#contacto">Quero testar</a>
+    </div>
+  </header>
+
+  <main id="conteudo-principal" tabindex="-1">
+    <section class="hero" id="hero">
+      <div class="inner">
+        <div class="hero-copy">
+          <div class="accent-bar">Mobilidade partilhada · sem fricção</div>
+          <h1>Rentabilize o seu carro nas horas paradas.</h1>
+          <p>NovaFrota conecta proprietários e condutores verificados para alugueres sob medida: por hora, por dia ou nos períodos em que o carro estaria parado. Agora o seu carro deixa de ser despesa e passa a gerar rendimento sempre que não está consigo.</p>
+          <div class="hero-note" role="status">Transforme o seu carro em renda extra: defina o valor, aprove a reserva e receba semanalmente sem complicações.</div>
+          <ul class="hero-list">
+            <li><span>1</span> Defina horários, limites e preço.</li>
+            <li><span>2</span> Acompanhe a localização aproximada do veículo em tempo real durante o aluguer.</li>
+            <li><span>3</span> Acompanhe quilometragem e avaliações.</li>
+          </ul>
+          <form class="hero-form" data-form data-endpoint="/api/leads" novalidate>
+            <div class="form-fields">
+              <label class="visually-hidden" for="hero-email">O seu email</label>
+              <input id="hero-email" type="email" name="email" placeholder="Deixe o seu email para entrar na beta" autocomplete="email" required aria-describedby="hero-form-feedback">
+              <input type="hidden" name="consentTimestamp" value="">
+              <button type="submit">Entrar na lista</button>
+            </div>
+            <label class="form-consent">
+              <input type="checkbox" name="consent" required aria-describedby="hero-form-feedback consent-text">
+              <span id="consent-text">Confirmo que li e aceito a <a href="privacidade.html">Política de Privacidade</a> e autorizo o tratamento do meu email para receber comunicações sobre a NovaFrota.</span>
+            </label>
+          </form>
+          <div class="feedback" data-feedback id="hero-form-feedback" aria-live="polite" role="status"></div>
+        </div>
+        <div class="hero-media">
+          <picture class="hero-visual">
+            <source srcset="assets/media/hero.png" type="image/png">
+            <img src="assets/media/hero.png" alt="Motorista a conduzir com aplicação de navegação no smartphone" loading="lazy">
+          </picture>
+          <div class="hero-device">
+            <div class="device-header">
+              <span class="pill">Painel NovaFrota</span>
+              <div class="stat">
+                <small>Ganhos este mês</small>
+                <strong>€742</strong>
+              </div>
+            </div>
+            <div class="rides">
+              <div class="ride-card">
+                <h4>Reserva confirmada — Centro empresarial</h4>
+                <div class="ride-meta">
+                  <span>Hoje · 12:30 → 18:30</span>
+                  <span>€48</span>
+                </div>
+                <div class="progress" style="--progress: 0.75;" aria-hidden="true"></div>
+                <div class="ride-meta">
+                  <span>Condutor: Leonor A.</span>
+                  <span>Estado: Em curso</span>
+                </div>
+              </div>
+              <div class="ride-card" style="border-color: var(--stroke-strong);">
+                <h4>Pedido pendente — Parque do Lago</h4>
+                <div class="ride-meta">
+                  <span>Amanhã · 08:00 → 13:00</span>
+                  <span>€32</span>
+                </div>
+                <div class="progress" style="--progress: 0.35;" aria-hidden="true"></div>
+                <div class="ride-meta">
+                  <span>Condutor: Miguel R.</span>
+                  <span>Aguardar resposta</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="section-header">
+        <h2>Como funciona</h2>
+        <p>Uma experiência pensada para ser transparente, digital e segura. Do upload dos documentos ao registo fotográfico do veículo, tudo num fluxo simples em que o controlo é sempre seu.</p>
+      </div>
+      <div class="grid columns-3">
+        <article class="card">
+          <span class="badge">01</span>
+          <h3>Configure a sua frota</h3>
+          <p>Crie o perfil do carro, defina calendários e disponibilidades por hora/dia, imponha limites de quilometragem e adicione tarifas dinâmicas para horários de maior procura.</p>
+        </article>
+        <article class="card">
+          <span class="badge">02</span>
+          <h3>Confirme reservas</h3>
+          <p>Receba pedidos em tempo real, valide condutores verificados e partilhe instruções claras. O mapa partilhado mantém-no no controlo durante todo o período.</p>
+        </article>
+        <article class="card">
+          <span class="badge">03</span>
+          <h3>Registe e receba</h3>
+          <p>Acompanha check-in/out com fotos guiadas, quilometragem e eventualidades. Controlo total no painel.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="beneficios">
+      <div class="section-header">
+        <h2>Benefícios para ambos os lados</h2>
+        <p>Construímos dois painéis dedicados: um para quem partilha, outro para quem conduz. Cada detalhe foi pensado para eliminar fricção e aumentar a confiança.</p>
+      </div>
+      <div class="split">
+        <div class="card">
+          <span class="badge">Proprietários</span>
+          <ul class="list">
+            <li>
+              <span class="list-icon">A</span>
+              <div>
+                <strong>Agenda inteligente</strong>
+                Bloqueie horários pessoais, sincronize com o calendário e configure regras para entregas em locais específicos.
+              </div>
+            </li>
+            <li>
+              <span class="list-icon">B</span>
+              <div>
+                <strong>Ganhos controlados</strong>
+                Receitas claras com pagamentos semanais, caução digital e alertas se o trajeto ultrapassar limites predefinidos.
+              </div>
+            </li>
+            <li>
+              <span class="list-icon">C</span>
+              <div>
+                <strong>Insights de frota</strong>
+                Relatórios automáticos com ocupação, receitas por período e sugestões de preço baseado na procura da sua zona.
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="badge">Condutores</span>
+          <ul class="list">
+            <li>
+              <span class="list-icon">1</span>
+              <div>
+                <strong>Acesso flexível</strong>
+                Alugue apenas pelas horas necessárias com recolha e devolução pré-combinadas. Sem filas, sem papelada.
+              </div>
+            </li>
+            <li>
+              <span class="list-icon">2</span>
+              <div>
+                <strong>Perfil validado</strong>
+                Documentos e histórico de condução num único lugar, com reputação e avaliações para desbloquear melhores tarifas.
+              </div>
+            </li>
+            <li>
+              <span class="list-icon">3</span>
+              <div>
+                <strong>Suporte 24/7</strong>
+                Assistência na estrada, chat com o proprietário e registo fotográfico orientado para evitar mal-entendidos.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery">
+      <div class="section-header">
+        <h2>Momentos NovaFrota</h2>
+        <p>Conexão entre pessoas, mobilidade urbana em ritmo sustentável e partilha inteligente de veículos. Inspirados pelas ruas vivas e pelo futuro da mobilidade.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-card">
+          <picture>
+            <source srcset="assets/media/gallery-1.png" type="image/png">
+            <img src="assets/media/gallery-1.png" alt="Cliente a entrar num carro com motorista profissional numa rua moderna" loading="lazy">
+          </picture>
+          <figcaption>Partilhas urbanas com recolha em pontos estratégicos.</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <picture>
+            <source srcset="assets/media/gallery-2.png" type="image/png">
+            <img src="assets/media/gallery-2.png" alt="Motorista a consultar a app num telemóvel enquanto aguarda passageiro" loading="lazy">
+          </picture>
+          <figcaption>Painéis digitais que colocam os condutores no controlo.</figcaption>
+        </figure>
+        <figure class="gallery-card">
+          <picture>
+            <source srcset="assets/media/gallery-3.png" type="image/png">
+            <img src="assets/media/gallery-3.png" alt="Carro premium a circular numa avenida iluminada à noite" loading="lazy">
+          </picture>
+          <figcaption>Cidades com veículos sempre em movimento.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="seguranca">
+      <div class="section-header">
+        <h2>Confiança e controlo na base</h2>
+        <p>Integramos parceiros de verificação, monitorização e pagamentos para que cada etapa seja clara. A plataforma foi desenhada para proteger pessoas, veículos e acordos.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <h3>Verificação tripla</h3>
+          <p>Documentos, reconhecimento facial e histórico de condução analisados com inteligência artificial e validação humana.</p>
+        </div>
+        <div class="trust-card">
+          <h3>Localização partilhada</h3>
+          <p>Mapa em tempo real disponível para ambos os lados durante o aluguer, com histórico de percursos e alertas configuráveis.</p>
+        </div>
+        <div class="trust-card">
+          <h3>Contrato digital</h3>
+          <p>Checklist guiado com fotos antes/depois, assinatura digital e registo imutável com data/hora.</p>
+        </div>
+        <div class="trust-card">
+          <h3>Pagamentos protegidos</h3>
+          <p>Pagamentos são processados com autenticação forte.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="app">
+      <div class="section-header">
+        <h2>Aplicação pronta para escalar</h2>
+        <p>Estamos a desenvolver experiências nativas para iOS, Android e versão web progressiva. Notificações em tempo real e integração com veículos conectados estão no roadmap.</p>
+      </div>
+      <div class="grid columns-3">
+        <article class="card">
+          <span class="badge">Soon</span>
+          <h3>App proprietários</h3>
+          <p>Monitorize reservas, aprove ou recuse pedidos com um toque e acompanhe inspeções fotográficas em directo.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Soon</span>
+          <h3>App condutores</h3>
+          <p>Localize o veículo, receba checklists interativos, faça upload de fotos e desbloqueie o carro (quando compatível).</p>
+        </article>
+        <article class="card">
+          <span class="badge">Labs</span>
+          <h3>Plataforma API</h3>
+          <p>Integrações com frotas corporativas, parceiros de mobilidade urbana e dados em tempo real para cidades inteligentes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="section-header">
+        <h2>Junte-se à beta privada</h2>
+        <p>Estamos a seleccionar os primeiros utilizadores para pilotar em Lisboa e Porto. Se tem uma frota parada ou precisa de flexibilidade diária, fale connosco.</p>
+      </div>
+      <div class="cta-block">
+        <p>Partilhe algumas informações sobre o seu caso de uso e entraremos em contacto com prioridade. Quer criar rendimento extra ao partilhar o carro? Quer acesso fácil a uma frota urbana? A equipa NovaFrota quer perceber a sua necessidade.</p>
+        <div class="button-row">
+          <a class="button primary" href="mailto:support@novafrota.pt?subject=Quero%20participar%20na%20beta%20NovaFrota">Falar com a equipa</a>
+          <a class="button" href="#hero">Ver demo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cookie-banner is-hidden" role="dialog" aria-live="polite" aria-modal="false" aria-hidden="true" aria-labelledby="cookie-banner-title" aria-describedby="cookie-banner-description cookie-banner-note" tabindex="-1" data-cookie-banner>
+    <div>
+      <strong id="cookie-banner-title">Preferências de privacidade</strong>
+      <p id="cookie-banner-description">Usamos cookies estritamente necessários para que o site funcione. Opcionalmente, podemos usar métricas anónimas para melhorar a experiência.</p>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="accept" data-cookie-accept>Aceitar tudo</button>
+      <button type="button" data-cookie-decline>Apenas essenciais</button>
+    </div>
+    <p class="legal-note" id="cookie-banner-note">Pode rever ou alterar o consentimento a qualquer momento em <a href="privacidade.html">Privacidade & GDPR</a> ou consultar a <a href="cookies.html">Política de Cookies</a>.</p>
+  </div>
+
+  <footer>
+    <div class="inner">
+      <nav aria-label="Navegação do rodapé">
+        <a href="#hero">Início</a>
+        <a href="#como-funciona">Fluxo</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#seguranca">Segurança</a>
+        <a href="#app">App</a>
+        <a href="#contacto">Contacto</a>
+        <a href="privacidade.html">Privacidade</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="acessibilidade.html">Acessibilidade</a>
+        <a href="termos.html">Termos</a>
+        <button type="button" class="footer-manage" data-cookie-manage>Gerir cookies</button>
+      </nav>
+      <small>NovaFrota © <span id="year"></span> · Mobilidade partilhada, segura e inteligente.</small>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector('[data-header]');
+    const form = document.querySelector('[data-form]');
+    const feedback = document.querySelector('[data-feedback]');
+    const yearEl = document.getElementById('year');
+    const cookieBanner = document.querySelector('[data-cookie-banner]');
+    const cookieAcceptBtn = document.querySelector('[data-cookie-accept]');
+    const cookieDeclineBtn = document.querySelector('[data-cookie-decline]');
+    const cookieManageButtons = document.querySelectorAll('[data-cookie-manage]');
+    const mainNav = document.querySelector('[data-nav]');
+    const navLinks = mainNav ? Array.from(mainNav.querySelectorAll('a[href^="#"]')) : [];
+    const trackedSections = navLinks.length > 0
+      ? Array.from(document.querySelectorAll('main section[id]'))
+          .filter((section) => navLinks.some((link) => link.getAttribute('href') === `#${section.id}`))
+      : [];
+    const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    let releaseCookieFocusTrap = null;
+    let lastFocusedBeforeCookie = null;
+    const COOKIE_KEY = 'novafrota-cookie-consent';
+
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    if (header) {
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('is-scrolled', window.scrollY > 10);
+      }, { passive: true });
+    }
+
+    function updateActiveNav(sectionId) {
+      if (navLinks.length === 0 || !sectionId) {
+        return;
+      }
+      navLinks.forEach((link) => {
+        if (link.getAttribute('href') === `#${sectionId}`) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    if (navLinks.length > 0) {
+      if ('IntersectionObserver' in window && trackedSections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries.filter((entry) => entry.isIntersecting);
+          if (visible.length > 0) {
+            visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+            updateActiveNav(visible[0].target.id);
+          }
+        }, { threshold: 0.5 });
+
+        trackedSections.forEach((section) => observer.observe(section));
+      }
+
+      window.addEventListener('hashchange', () => {
+        const targetId = window.location.hash.replace('#', '');
+        if (targetId) {
+          updateActiveNav(targetId);
+        }
+      });
+
+      if (window.location.hash) {
+        updateActiveNav(window.location.hash.replace('#', ''));
+      } else if (trackedSections[0]) {
+        updateActiveNav(trackedSections[0].id);
+      }
+    }
+
+    function storeCookiePreference(value) {
+      const record = {
+        value,
+        timestamp: new Date().toISOString(),
+      };
+      try {
+        localStorage.setItem(COOKIE_KEY, JSON.stringify(record));
+      } catch (error) {
+        console.warn('Não foi possível guardar a preferência de cookies.', error);
+      }
+    }
+
+    function getCookiePreference() {
+      try {
+        const raw = localStorage.getItem(COOKIE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
+    }
+
+    function activateFocusTrap(container) {
+      const focusable = Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR));
+      if (focusable.length === 0) {
+        return () => {};
+      }
+
+      function handleKeydown(event) {
+        if (event.key !== 'Tab') {
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey) {
+          if (document.activeElement === first || document.activeElement === container) {
+            event.preventDefault();
+            last.focus();
+          }
+        } else if (document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+
+      container.addEventListener('keydown', handleKeydown);
+
+      return () => {
+        container.removeEventListener('keydown', handleKeydown);
+      };
+    }
+
+    function hideCookieBanner() {
+      if (cookieBanner) {
+        cookieBanner.classList.add('is-hidden');
+        cookieBanner.setAttribute('aria-hidden', 'true');
+        cookieBanner.setAttribute('aria-modal', 'false');
+        if (typeof releaseCookieFocusTrap === 'function') {
+          releaseCookieFocusTrap();
+          releaseCookieFocusTrap = null;
+        }
+        if (lastFocusedBeforeCookie && typeof lastFocusedBeforeCookie.focus === 'function') {
+          lastFocusedBeforeCookie.focus();
+        }
+        lastFocusedBeforeCookie = null;
+      }
+    }
+
+    function showCookieBanner() {
+      if (cookieBanner) {
+        if (typeof releaseCookieFocusTrap === 'function') {
+          releaseCookieFocusTrap();
+        }
+        cookieBanner.classList.remove('is-hidden');
+        cookieBanner.setAttribute('aria-hidden', 'false');
+        cookieBanner.setAttribute('aria-modal', 'true');
+        lastFocusedBeforeCookie = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        releaseCookieFocusTrap = activateFocusTrap(cookieBanner);
+        const focusTarget = cookieAcceptBtn || cookieBanner.querySelector(FOCUSABLE_SELECTOR) || cookieBanner;
+        if (focusTarget && typeof focusTarget.focus === 'function') {
+          focusTarget.focus();
+        }
+      }
+    }
+
+    const existingPreference = getCookiePreference();
+    if (!existingPreference) {
+      showCookieBanner();
+    } else {
+      hideCookieBanner();
+    }
+
+    if (cookieAcceptBtn) {
+      cookieAcceptBtn.addEventListener('click', () => {
+        storeCookiePreference('accepted');
+        hideCookieBanner();
+      });
+    }
+
+    if (cookieDeclineBtn) {
+      cookieDeclineBtn.addEventListener('click', () => {
+        storeCookiePreference('essential-only');
+        hideCookieBanner();
+      });
+    }
+
+    if (cookieManageButtons.length > 0) {
+      cookieManageButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          showCookieBanner();
+        });
+      });
+    }
+
+    if (form && feedback) {
+      const emailField = form.elements.email;
+      const consentField = form.elements.consent;
+      const consentTimestampField = form.elements.consentTimestamp;
+
+      if (emailField) {
+        emailField.addEventListener('input', () => {
+          emailField.removeAttribute('aria-invalid');
+        });
+      }
+
+      if (consentField) {
+        consentField.addEventListener('change', () => {
+          consentField.removeAttribute('aria-invalid');
+        });
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!emailField) {
+          return;
+        }
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const endpoint = form.dataset.endpoint || '/api/leads';
+        feedback.classList.remove('is-visible');
+        feedback.textContent = '';
+
+        const email = emailField.value.trim();
+        emailField.value = email;
+
+        if (!emailField.validity.valid) {
+          emailField.setAttribute('aria-invalid', 'true');
+          feedback.textContent = 'Introduza um email válido para receber o convite.';
+          feedback.classList.add('is-visible');
+          emailField.focus();
+          return;
+        }
+
+        emailField.removeAttribute('aria-invalid');
+
+        if (!consentField || !consentField.checked) {
+          if (consentField) {
+            consentField.setAttribute('aria-invalid', 'true');
+            consentField.focus();
+          }
+          feedback.textContent = 'Confirme que aceita a Política de Privacidade para continuarmos.';
+          feedback.classList.add('is-visible');
+          return;
+        }
+
+        consentField.removeAttribute('aria-invalid');
+
+        const consentTimestamp = new Date().toISOString();
+        if (consentTimestampField) {
+          consentTimestampField.value = consentTimestamp;
+        }
+
+        const payload = {
+          email,
+          consent: true,
+          consentTimestamp,
+          userAgent: navigator.userAgent
+        };
+
+        form.setAttribute('aria-busy', 'true');
+        if (submitButton) {
+          submitButton.setAttribute('disabled', 'disabled');
+        }
+
+        try {
+          const stored = JSON.parse(localStorage.getItem('novafrota-consents') || '[]');
+          stored.push(payload);
+          localStorage.setItem('novafrota-consents', JSON.stringify(stored));
+        } catch (storageError) {
+          console.warn('Não foi possível guardar o registo localmente.', storageError);
+        }
+
+        let requestSucceeded = false;
+
+        if (typeof fetch === 'function') {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payload)
+            });
+            requestSucceeded = response.ok;
+          } catch (networkError) {
+            console.warn('Falha ao comunicar com o servidor de leads.', networkError);
+          }
+        }
+
+        if (requestSucceeded) {
+          feedback.textContent = 'Obrigado! Entraremos em contacto com novidades da beta.';
+          feedback.classList.add('is-visible');
+          form.reset();
+        } else {
+          feedback.textContent = 'Guardámos o seu pedido localmente. Caso não receba resposta em 24h, envie-nos um email para support@novafrota.pt.';
+          feedback.classList.add('is-visible');
+        }
+
+        form.removeAttribute('aria-busy');
+        if (submitButton) {
+          submitButton.removeAttribute('disabled');
+        }
+
+        setTimeout(() => {
+          feedback.classList.remove('is-visible');
+          feedback.textContent = '';
+        }, 6000);
+      });
+    }
+  </script>
+</body>
+</html>
