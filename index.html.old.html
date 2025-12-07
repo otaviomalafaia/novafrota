@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>NovaFrota — Voltamos já!</title>
+  <style>
+    :root {
+      --bg: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+      --surface: rgba(15, 23, 42, 0.72);
+      --surface-strong: rgba(30, 41, 59, 0.85);
+      --accent: #38bdf8;
+      --accent-strong: #0ea5e9;
+      --text: #f8fafc;
+      --muted: #cbd5f5;
+      --radius: 18px;
+      --shadow: 0 24px 48px rgba(8, 47, 73, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      border: 0;
+      white-space: nowrap;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px 80px;
+      line-height: 1.6;
+    }
+
+    .wrapper {
+      max-width: 640px;
+      width: 100%;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      display: grid;
+      gap: 36px;
+    }
+
+    header {
+      display: grid;
+      gap: 16px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .animation {
+      position: relative;
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      padding: 40px 16px 56px;
+      overflow: hidden;
+    }
+
+    .road {
+      position: relative;
+      height: 6px;
+      margin-top: 32px;
+      background: rgba(226, 232, 240, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .road::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(90deg, transparent 0 40px, rgba(248, 250, 252, 0.8) 40px 60px);
+      animation: dash 1.2s linear infinite;
+    }
+
+    .car {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 54px;
+      margin-left: -20px;
+      font-size: 2.4rem;
+      filter: drop-shadow(0 12px 20px rgba(14, 165, 233, 0.45));
+      animation: drive 3.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+
+    .car svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .car::after {
+      content: '';
+      position: absolute;
+      right: 90%;
+      bottom: 12px;
+      width: 24px;
+      height: 12px;
+      border-radius: 999px;
+      background: radial-gradient(circle at center, rgba(59, 130, 246, 0.55) 0%, rgba(59, 130, 246, 0) 70%);
+      animation: trail 0.5s ease-out infinite;
+    }
+
+    .cta {
+      display: grid;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 14px 28px -16px rgba(56, 189, 248, 0.65);
+    }
+
+    .cta a:hover,
+    .cta a:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px -14px rgba(56, 189, 248, 0.75);
+    }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      color: rgba(226, 232, 240, 0.6);
+      font-size: 0.85rem;
+    }
+
+    @keyframes drive {
+      0% {
+        transform: translateX(-120%) translateY(0);
+      }
+      50% {
+        transform: translateX(20%) translateY(-6px);
+      }
+      100% {
+        transform: translateX(140%) translateY(0);
+      }
+    }
+
+    @keyframes dash {
+      from { transform: translateX(0); }
+      to { transform: translateX(-120px); }
+    }
+
+    @keyframes trail {
+      0% {
+        opacity: 0.9;
+        transform: translateX(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-12px) scale(1.4);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001s !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <header>
+      <h1>Estamos a afinar os motores</h1>
+      <p>A garagem digital da NovaFrota está em manutenção. Estamos a preparar uma experiência ainda melhor. Enquanto isso, desfrute da nossa volta de aquecimento!</p>
+    </header>
+
+    <section class="animation" aria-labelledby="anim-title">
+      <h2 id="anim-title" class="visually-hidden">Animação de carro em andamento</h2>
+      <div class="car" aria-hidden="true">
+        <svg viewBox="0 0 180 90" role="img" aria-hidden="true">
+          <path d="M18 52h16l18-28h64l18 28h14a18 18 0 0 1 18 18v12H0V70a18 18 0 0 1 18-18Z" fill="#38bdf8" stroke="#0f172a" stroke-width="6" stroke-linejoin="round" />
+          <circle cx="54" cy="72" r="14" fill="#0f172a" stroke="#e2e8f0" stroke-width="6" />
+          <circle cx="118" cy="72" r="14" fill="#0f172a" stroke="#e2e8f0" stroke-width="6" />
+          <path d="M74 34h32" stroke="#0f172a" stroke-width="6" stroke-linecap="round" />
+        </svg>
+      </div>
+      <div class="road" aria-hidden="true"></div>
+    </section>
+
+    <div class="cta">
+      <p>Precisa de falar connosco já? Envie-nos um email e respondemos o mais depressa possível.</p>
+      <a href="mailto:support@novafrota.pt">support@novafrota.pt</a>
+    </div>
+  </main>
+
+  <footer>
+    NovaFrota © <span id="year"></span> · Voltamos já.
+  </footer>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>
